@@ -16,6 +16,7 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -23,6 +24,23 @@ plugins {
   id("com.google.devtools.ksp")
   id("com.vanniktech.maven.publish")
   alias(libs.plugins.mavenShadow)
+}
+
+// TenTen Modification
+publishing {
+  repositories {
+    maven("https://maven.pkg.github.com/chanelten/moshi") {
+      name = "GitHub"
+
+      val releaseProperties = rootProject.file("release.properties")
+        .run { Properties().also { it.load(reader()) } }
+
+      credentials {
+        username = releaseProperties.getProperty("GPR_USER")
+        password = releaseProperties.getProperty("GPR_TOKEN")
+      }
+    }
+  }
 }
 
 tasks.withType<KotlinCompile>().configureEach {

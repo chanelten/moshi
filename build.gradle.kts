@@ -41,35 +41,35 @@ plugins {
   alias(libs.plugins.japicmp) apply false
 }
 
-spotless {
-  format("misc") {
-    target("*.md", ".gitignore")
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
-    endWithNewline()
-  }
-  val configureCommonJavaFormat: JavaExtension.() -> Unit = {
-    googleJavaFormat(libs.versions.gjf.get())
-  }
-  java {
-    configureCommonJavaFormat()
-    target("**/*.java")
-    targetExclude("**/build/**",)
-  }
-  kotlin {
-    ktlint(libs.versions.ktlint.get()).userData(mapOf("indent_size" to "2"))
-    target("**/*.kt")
-    trimTrailingWhitespace()
-    endWithNewline()
-    targetExclude("**/Dependencies.kt", "**/build/**")
-  }
-  kotlinGradle {
-    ktlint(libs.versions.ktlint.get()).userData(mapOf("indent_size" to "2"))
-    target("**/*.gradle.kts")
-    trimTrailingWhitespace()
-    endWithNewline()
-  }
-}
+//spotless {
+//  format("misc") {
+//    target("*.md", ".gitignore")
+//    trimTrailingWhitespace()
+//    indentWithSpaces(2)
+//    endWithNewline()
+//  }
+//  val configureCommonJavaFormat: JavaExtension.() -> Unit = {
+//    googleJavaFormat(libs.versions.gjf.get())
+//  }
+//  java {
+//    configureCommonJavaFormat()
+//    target("**/*.java")
+//    targetExclude("**/build/**",)
+//  }
+//  kotlin {
+//    ktlint(libs.versions.ktlint.get()).userData(mapOf("indent_size" to "2"))
+//    target("**/*.kt")
+//    trimTrailingWhitespace()
+//    endWithNewline()
+//    targetExclude("**/Dependencies.kt", "**/build/**")
+//  }
+//  kotlinGradle {
+//    ktlint(libs.versions.ktlint.get()).userData(mapOf("indent_size" to "2"))
+//    target("**/*.gradle.kts")
+//    trimTrailingWhitespace()
+//    endWithNewline()
+//  }
+//}
 
 subprojects {
   repositories {
